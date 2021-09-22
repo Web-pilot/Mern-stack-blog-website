@@ -1,47 +1,98 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
+import { Context } from "../../context/Context";
 import NavBar from "../NavBar";
 
 const Post = () => {
+  const { user } = useContext(Context);
+  const location = useLocation();
+  const path = location.pathname.split("/")[2];
+  const [post, setPost] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      const res = await axios.get(`/posts/${path}`);
+      setPost(res.data);
+    };
+    fetchPost();
+  }, [path]);
+
+  const deletePost = async () => {
+    await axios.delete("/posts/" + path, { data: { username: user.username } });
+    window.location.replace("/blogpost");
+  };
+
+  const handleChanges = async () => {
+    await axios.put(`/posts/${path}`, post);
+    setIsEditing(false);
+  };
+  const PF = "http://localhost:5000/images/";
   return (
     <>
       <NavBar />
       <main className="container-post">
         <section className="single-post">
-          <h1 className="single-post-title">About saint peter </h1>
-          <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV35IBH99knwA26JW1hw9DG4PFh7e9DE8t6g&usqp=CAU"
-            alt=""
-          />
-          <div className="edit-delete">
-            <FaEdit className="edit-icon" />
-            <FaTrash className="delete-icon" />
-          </div>
+          {isEditing ? (
+            <input
+              type="text"
+              value={post.title}
+              id="title"
+              className='edit-title'
+              onChange={(e) =>
+                setPost((prev) => {
+                  return { ...prev, title: e.target.value };
+                })
+              }
+            />
+          ) : (
+            <h1 className="single-post-title">{post.title}</h1>
+          )}
+          {post.photo && <img src={PF + post.photo} alt="" />}
+          {user.username === post.username && (
+            <div className="edit-delete">
+              <FaEdit
+                className="edit-icon"
+                onClick={() => setIsEditing(true)}
+              />
+              <FaTrash className="delete-icon" onClick={deletePost} />
+            </div>
+          )}
+
           <div className="details">
             <h5>
-              Author: <span>Paul</span>
+              <Link to={`/blogpost?username=${post.username}`}>
+                Author: <span>{post.username}</span>
+              </Link>
             </h5>
             <h5>
-              <span>Jan, 20 2021</span>
+              <span>{new Date(post.createdAt).toDateString()}</span>
             </h5>
           </div>
-          <article className="post-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-            nisi qui animi officiis quam explicabo et enim aliquid voluptates
-            necessitatibus repellendus blanditiis sequi atque, quis aut rerum
-            similique recusandae eligendi quidem soluta! Facilis quos vel nemo
-            quas laudantium. In hic cumque asperiores quas. Maiores tempore modi
-            fugiat consequatur quasi sunt reiciendis, tempora qui voluptatum
-            iusto at perferendis deserunt alias consequuntur illo voluptatibus
-            pariatur voluptates corrupti tenetur. Earum asperiores magnam sed
-            nostrum minima accusantium autem perferendis quaerat quis. Fugiat,
-            unde aut. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Optio dignissimos unde, vero et accusantium quibusdam cumque modi
-            cupiditate delectus veritatis! Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Velit ea laboriosam reiciendis dolore.
-            Quia reiciendis sed dignissimos libero reprehenderit maiores!
-          </article>
+          {isEditing ? (
+            <>
+              <textarea
+                type="text"
+                className="edit-post"
+                rows="10"
+                value={post.desc}
+                onChange={(e) =>
+                  setPost((prev) => {
+                    return { ...prev, desc: e.target.value };
+                  })
+                }
+              />
+              <button id="publish-btn" onClick={handleChanges}>
+                Update
+              </button>
+            </>
+          ) : (
+            <article className="post-desc">{post.desc}</article>
+          )}
         </section>
       </main>
     </>

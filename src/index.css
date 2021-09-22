@@ -611,8 +611,8 @@ SINGLE POST
 UPADATE USER INFORMATION
 ================= */
 .update-user-container {
-  margin-top: 3rem;
-  max-width: 500px;
+  margin: 3rem auto;
+  max-width: 800px;
   padding: 0.5em;
 }
 .update-user-container h1 {
@@ -658,19 +658,32 @@ form {
   border: 0.1em solid #ff3300;
   box-shadow: none;
 }
-#update-btn {
+#delete-btn {
   position: absolute;
   top: 0.5em;
-  right: 2em;
-  padding: 0.3em 1em;
-  background: #d63636;
+  right: 0em;
+  padding: 0.3em;
+  background: #dd6161;
   border: none;
   color: var(--light-cl);
   transition: 0.5s;
   cursor: pointer;
+  font-size: 0.5em;
 }
 #update-btn:hover {
   background: #a50909;
+}
+.update-btn {
+  background: #352c7e;
+  color: white;
+  border: none;
+  padding: 0.3em 0.5em;
+  margin: .5em 0;
+  cursor: pointer;
+  transition: .5s;
+}
+.update-btn:hover {
+   background: #080238;
 }
 
 /* =================
@@ -784,7 +797,9 @@ CREATE POST
   padding: 0.2em;
 }
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.edit-post:focus,
+.edit-title {
   outline: none;
 }
 #title {
@@ -848,4 +863,13 @@ CREATE POST
 }
 a {
   text-decoration: none;
+}
+
+.edit-post,
+.edit-title {
+   width: 100%;
+  margin: 0.2em;
+  border: none;
+  padding: 0.2em;
+  height: auto;
 }

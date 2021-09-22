@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { Link } from "react-router-dom";
 import {
@@ -9,15 +9,20 @@ import {
   FaUser,
 } from "react-icons/fa";
 
-import image from "../images/category-2.jpg";
+import { Context } from "../context/Context";
 
 const NavBar = () => {
+  const { dispatch, user } = useContext(Context);
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsNavOpen((prev) => !prev);
   };
-  let user = true;
+
+  const handleLogOut = () =>{
+     dispatch({type: "LOG_OUT"})
+  }
+  const PF = 'http://localhost:5000/images/'
   return (
     <header>
       <nav className="nav-bar">
@@ -26,9 +31,11 @@ const NavBar = () => {
             <Link to="/">St John</Link>
           </h1>
           {user && (
+             <Link to={`/settings`}>
             <div className="setting">
-              <img src={image} alt="" className="profile" />
+              <img src={PF + user.profilePic} alt="" className="profile" />
             </div>
+            </Link>
           )}
           <FaBars className="toggle-btn" onClick={toggleNavbar} />
         </div>
@@ -48,18 +55,18 @@ const NavBar = () => {
             </li>
           )}
           {user && (
-            <li className="list-item">
+            <li className="list-item" onClick={handleLogOut}>
               <FaUser /> LogOut
             </li>
           )}
         </ul>
         <div className="social-icons">
-          {user || (
+          {!user && (
             <Link to="/register" className="signIn-btn">
               Register
             </Link>
           )}
-          {user || (
+          {!user && (
             <Link to="/login" className="signIn-btn">
               Login
             </Link>

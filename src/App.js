@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from "react";
-import Activities from "./components/Activities";
+import React, { useContext } from "react";
+
 import BlogsPost from "./components/blog/BlogsPost";
 import Post from "./components/blog/Post";
 import CreatePost from "./components/CreatePost";
-import Events from "./components/Events";
-import Hero from "./components/Hero";
 import Login from "./components/Login";
-
-import NavBar from "./components/NavBar";
 import Register from "./components/Register";
-import Sermon from "./components/Sermon";
-import SideBar from "./components/SideBar";
-import UpdateUser from "./components/UpdateUser";
 import Home from "./Home";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Context } from "./context/Context";
+import UpdateUser from "./components/UpdateUser";
 
 function App() {
-  let user = false;
+  const { user } = useContext(Context);
+
   return (
     <>
       <Router>
@@ -33,7 +29,8 @@ function App() {
           <Route path="/blogpost">
             <BlogsPost />
           </Route>
-          <Route path="/:id">{user ? <Post /> : <Register />}</Route>
+          <Route path="/post/:id">{user ? <Post /> : <Register />}</Route>
+          <Route path="/settings">{user ? <UpdateUser /> : <Register />}</Route>
         </Switch>
       </Router>
     </>
