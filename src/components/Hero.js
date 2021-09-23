@@ -1,21 +1,23 @@
 import React from "react";
 
-import image from "../images/category-2.jpg";
+import SideBar from "./SideBar";
 const Hero = () => {
   return (
-    <main className="section main-hero">
-      <div className="hero-img">
-        <img src={image} alt="st.john" />
-        <div className="hero-info">
-          <h1 className="hero-title">ST.JOHN</h1>
-          <p>
-            veniam accusantium laudantium, repudiandae vel reprehenderit
-            provident corrupti repellat aliquam ipsum aliquid earum est aperiam
-            autem perferendis?
-          </p>
+    <>
+      <main className="section main-hero">
+        <div className="hero-img">
+          <div className="hero-info">
+            <h1 className="hero-title">STORY LAND</h1>
+            <p>
+              You've ever got a story to tell all just want to have some fun
+              reading stories, then story land is the right place for you, just
+              sign up for an account and get started
+            </p>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <SideBar />
+    </>
   );
 };
 

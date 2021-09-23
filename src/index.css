@@ -23,6 +23,7 @@ img {
 }
 .title {
   text-align: center;
+  
 }
 .section {
   margin-top: var(--section-margin);
@@ -57,7 +58,8 @@ img {
   z-index: 33;
 }
 .nav-logo {
-  font-size: 1em;
+  font-size: 0.77em;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 .toggle-btn {
   cursor: pointer;
@@ -101,8 +103,6 @@ img {
 .signIn-btn {
   padding: 0 5px;
   text-decoration: none;
-  background: var(--btn-cl);
-  color: var(--light-cl);
   border-radius: 0.2em;
 }
 
@@ -150,6 +150,15 @@ SECTION HERO
   height: 80vh;
   width: 100%;
   position: relative;
+  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD0cibTWDb3MdF3zruoIhr1zekY9hDePt1pA&usqp=CAU"),
+    linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background-blend-mode: multiply;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: var(--light-cl);
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
 }
 .main-hero {
   width: 100%;
@@ -173,55 +182,6 @@ SECTION HERO
 /* ==============
 ACTIVITIES
 ================= */
-.act-title {
-  text-transform: uppercase;
-  text-align: center;
-}
-.underline {
-  width: 60px;
-  height: 2px;
-  background: var(--btn-cl);
-  text-align: center;
-  margin: 2px auto;
-  display: block;
-}
-.act-info {
-  background: var(--light-cl);
-  max-width: 600px;
-  margin: 2em auto 0 auto;
-  padding: 5px;
-  position: relative;
-}
-.act-info ul {
-  list-style: none;
-}
-.act-info ul li {
-  margin: var(--nv-spacing);
-}
-.act-info li span {
-  font-weight: bold;
-  color: var(--btn-cl);
-}
-.act-btn {
-  padding: 5px;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  border: 10px solid var(--bg-cl);
-  border-radius: 50%;
-  margin: 0.2em 0.5em;
-  display: inline-block;
-  cursor: pointer;
-  font-size: 0.6em;
-}
-.act-btn.active {
-  background: var(--btn-cl);
-  color: var(--light-cl);
-}
-ul.activ {
-  transform: translateY(0);
-  z-index: 1;
-}
 
 /* ==============
 SERMON
@@ -251,6 +211,9 @@ SERMON
   display: flex;
   justify-content: space-between;
 }
+.sermon .title {
+   color: var(--gray-cl);
+}
 @media screen and (min-width: 660px) {
   .sermon {
     max-width: 300px;
@@ -261,41 +224,35 @@ SIDEBAR
 ================== */
 .sidebar {
   margin-top: 2rem;
-  min-height: 100vh;
   position: absolute;
   right: 3em;
   width: 300px;
   display: none;
+  background: white;
+  margin-left: .5em;
 }
 .sidebar-title {
-  padding: 1em;
-  margin-top: 2em;
-  border-top: 1px solid #333;
-  border-bottom: 1px solid #333;
+  padding: 0.5em;
   font-size: 0.66em;
   text-align: center;
+  color: var(--gray-cl);
+  color: rgb(100, 100, 202);
 }
 .sidebar-content {
-  padding: 1em;
+  padding: 0.5em;
   font-size: 0.66em;
 }
-.sidebar-team {
-  display: flex;
-  font-size: 0.55em;
-  justify-content: space-between;
-  list-style: none;
-  margin: 1em;
-  flex-wrap: wrap;
-}
-.sidebar-team li {
-  width: 40%;
-  margin-top: 0.5em;
-}
+
 .sidebar-icons {
   text-align: center;
-  margin-top: 0.55em;
+  margin: 0.55em;
+  font-size: 0.7em;
 }
-
+.sidebar .desc {
+  letter-spacing: 0.5px;
+  margin: 1em;
+  color: var(--gray-cl);
+}
 @media screen and (min-width: 660px) {
   .sidebar {
     display: block;
@@ -381,7 +338,7 @@ input[type="file"] {
 .slide .event-information {
   height: 100%;
   width: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+  background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
   position: absolute;
   display: block;
   top: 0;
@@ -397,15 +354,18 @@ input[type="file"] {
 BLOG POST
 =============== */
 .blogPost {
-  margin-top: 5em;
   position: relative;
   z-index: 35;
+  display: flex;
+  margin-top: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .category {
-  position: fixed;
+  position: sticky;
   top: 0em;
   width: 100%;
-  background: rgb(17, 15, 43);
+  background: #474770;
   color: var(--light-cl);
   margin-bottom: 1em;
 }
@@ -427,22 +387,29 @@ ul::-webkit-scrollbar {
   letter-spacing: 2px;
   line-height: 5em;
 }
+.category a {
+  color: white;
+}
 .category ul:first-child {
   padding-left: 6em;
 }
 .category .list-item:hover {
-  text-decoration: underline;
-  transform: scale(0.97);
   background: none;
   color: var(--bg-cl);
 }
 .category .list-item.active {
   color: var(--btn-cl);
 }
+.post-main-right {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 .post {
-  max-width: 600px;
+  width: 320px;
   min-height: 300px;
-  padding: 1em;
   margin: 0.6em auto;
   cursor: pointer;
 }
@@ -451,14 +418,14 @@ ul::-webkit-scrollbar {
   object-fit: cover;
 }
 .post.first {
-  margin-top: 5em;
+  margin-top: 0.55em;
 }
 .post-cat {
   text-align: right;
   color: var(--gray-cl);
 }
 .post-title {
-  font-size: 1em;
+  font-size: 0.8em;
 }
 .post-time {
   color: var(--gray-cl);
@@ -472,6 +439,7 @@ ul::-webkit-scrollbar {
   -webkit-box-orient: vertical;
   overflow: hidden;
   margin-top: 0.5em;
+  font-size: 0.66em;
 }
 .blogPost p::first-letter {
   color: red;
@@ -479,31 +447,31 @@ ul::-webkit-scrollbar {
 }
 @media screen and (min-width: 800px) {
   .blogPost {
-    margin: 3em 0;
+    margin: 3em auto;
+    max-width: 1200px;
+    padding: 0 1em;
+    justify-content: flex-start;
   }
   .category {
-    margin-top: rem;
-    min-height: 100vh;
-    position: absolute;
-    left: 3em;
-    width: 300px;
-    /* background: #03093a; */
-    border-radius: 1em;
-    /* color: var(--gray-cl); */
+    height: 50vh;
+    align-self: flex-start;
+    flex: 3;
+    position: sticky;
+    top: 5em;
+    border-radius: 0.5em;
     padding: 2px;
   }
   .post-main-right {
-    max-width: calc(100% - 300px);
-    margin-left: 370px;
+    flex: 9;
     display: flex;
-    margin-top: 4rem;
     flex-wrap: wrap;
+    margin-left: 25px;
   }
   .post.first {
     margin-top: 0.5em;
   }
   .post {
-    width: 50%;
+    width: 200px;
   }
   .category ul {
     justify-content: space-evenly;
@@ -524,8 +492,9 @@ ul::-webkit-scrollbar {
 .blog-carousel {
   height: 60vh;
   width: 100%;
-  /* background: linear-gradient(to left, rgb(214, 210, 235), rgb(13, 3, 26)); */
-  margin: 5em auto;
+  margin-top: 3em;
+  margin-left: auto;
+  margin-right: auto;
   color: var(--light-cl);
   overflow: hidden;
   position: relative;
@@ -533,7 +502,7 @@ ul::-webkit-scrollbar {
 .carousel {
   max-width: 1200px;
   height: inherit;
-  margin: 1em auto;
+  margin: 0em auto;
   padding: 5px;
   display: flex;
   overflow: hidden;
@@ -542,7 +511,7 @@ ul::-webkit-scrollbar {
 .blog-title-page {
   position: absolute;
   z-index: 3;
-  top: -0.2em;
+  top: -0.3em;
   color: #222;
   left: 50%;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -655,7 +624,7 @@ form {
   outline: none;
 }
 .form-control input:focus {
-  border: 0.1em solid #ff3300;
+  border: 0.1em solid #cfa79d;
   box-shadow: none;
 }
 #delete-btn {
@@ -663,9 +632,8 @@ form {
   top: 0.5em;
   right: 0em;
   padding: 0.3em;
-  background: #dd6161;
   border: none;
-  color: var(--light-cl);
+  color: red;
   transition: 0.5s;
   cursor: pointer;
   font-size: 0.5em;
@@ -678,12 +646,12 @@ form {
   color: white;
   border: none;
   padding: 0.3em 0.5em;
-  margin: .5em 0;
+  margin: 0.5em 0;
   cursor: pointer;
-  transition: .5s;
+  transition: 0.5s;
 }
 .update-btn:hover {
-   background: #080238;
+  background: #080238;
 }
 
 /* =================
@@ -703,12 +671,12 @@ REGISTER
 .register-form {
   max-width: 500px;
   justify-content: center;
-  background: #856a6a;
+  background: rgba(67, 67, 182, 0.9);
   border-radius: 1em;
   color: var(--bg-cl);
 }
 .register-btn {
-  background: teal;
+  background: rgb(40, 19, 158);
   border-radius: 1em;
   color: white;
   cursor: pointer;
@@ -746,7 +714,9 @@ REGISTER
 LOGIN
 =============== */
 .login-form {
-  background: #e2dbdb;
+  background: rgba(29, 29, 61, 0.9);
+  color: var(--light-cl);
+  width: 300px;
 }
 
 /* ================
@@ -757,8 +727,8 @@ CREATE POST
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: relative;
-  min-height: 100vh;
+  max-width: 1200px;
+  margin: 5em auto;
 }
 
 .add-foto-icon {
@@ -770,52 +740,43 @@ CREATE POST
   border-radius: 50%;
   color: #0e0202;
   cursor: pointer;
+  width: 39px;
+  height: 39px;
 }
 .create-post-img {
-  max-width: 500px;
-  padding: 1em;
-  display: flex;
-  align-items: center;
-  justify-items: center;
-  position: relative;
+  height: 200px;
 }
 .create-post-img img {
-  width: 450px;
-  display: block;
-  height: 200px;
-  object-fit: cover;
-}
-.form-group {
-  max-width: 500px;
-  padding: 0 1em;
+  max-width: 100%;
+  height: 100%;
 }
 .form-group input,
 .form-group textarea {
   width: 100%;
-  margin: 0.2em;
   border: none;
-  padding: 0.2em;
+  padding: 0.5em;
+  background: transparent;
 }
 .form-group input:focus,
 .form-group textarea:focus,
 .edit-post:focus,
 .edit-title {
   outline: none;
+  box-shadow: 0 0 1px;
 }
 #title {
-  font-weight: 900;
+  font-weight: 600;
+  letter-spacing: 1px;
+  padding: 0.2em;
 }
 #text {
-  font-weight: 600;
+  font-weight: 400;
   color: var(--gray-cl);
   min-height: 150px;
-}
-.create-post form {
-  padding: 0;
-  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 #publish-btn {
-  background: teal;
+  background: rgb(121, 142, 211);
   display: inline-block;
   width: auto;
   padding: 0.2em 1em;
@@ -824,33 +785,25 @@ CREATE POST
   transition: 0.5s;
 }
 #publish-btn:hover {
-  background: rgb(5, 90, 90);
+  background: rgb(5, 21, 90);
   color: white;
 }
-@media screen and (max-width: 414px) {
-  .form-group {
-    padding-left: 2em;
-  }
-  .create-post-img {
-    padding-left: 2.5rem;
+
+@media screen and (min-width: 840px) {
+  .create-post form {
+    width: 900px;
   }
 }
-
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1200px) {
   .create-post {
-    margin-top: 3rem;
+    margin-top: 1em;
     min-height: 100vh;
   }
   .create-post form {
-    width: 1000px;
+    width: 1200px;
   }
-  .create-post .form-group {
-    max-width: 100%;
-  }
+
   .create-post-img {
-    max-width: 100%;
-  }
-  .create-post img {
     width: 100%;
     height: 300px;
   }
@@ -863,11 +816,12 @@ CREATE POST
 }
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 .edit-post,
 .edit-title {
-   width: 100%;
+  width: 100%;
   margin: 0.2em;
   border: none;
   padding: 0.2em;

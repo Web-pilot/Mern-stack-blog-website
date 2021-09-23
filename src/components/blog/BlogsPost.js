@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import Carousel from "./Carousel";
 import NavBar from "../NavBar";
-import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
+import axios from "axios";
 
 const BlogsPost = () => {
-  const {search} = useLocation();
+  const { search } = useLocation();
   const [posts, setPosts] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  //Getting a single post
   useEffect(() => {
     const fetchPost = async () => {
       const res = await axios.get("/posts");
@@ -18,10 +19,13 @@ const BlogsPost = () => {
     fetchPost();
   }, [posts]);
 
+  //Getting posts base on query string
   useEffect(() => {
-     console.log(search)
-     axios.get('/posts', + search)
-  },[search]);
+    console.log(search);
+    axios.get("/posts", +search);
+  }, [search]);
+
+  //Get all categories
   useEffect(() => {
     const fetchCategories = async () => {
       const res = await axios.get("/categories");
@@ -30,15 +34,16 @@ const BlogsPost = () => {
     fetchCategories();
   }, [categories]);
 
+  //public folder where all images are located
   const PF = "http://localhost:5000/images/";
 
   return (
     <>
       <NavBar />
-      <Carousel />
+      <Carousel post={posts}/>
       <article className="blogPost">
         <section className="category">
-          <h1 className="sidebar-heading">Blog Posts</h1>
+          <h1 className="sidebar-heading">Story Land</h1>
           <h4 className="sidebar-title">categories</h4>
           <ul>
             {categories.map((category) => {

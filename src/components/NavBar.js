@@ -28,7 +28,7 @@ const NavBar = () => {
       <nav className="nav-bar">
         <div className="nav-brand">
           <h1 className="nav-logo">
-            <Link to="/">St John</Link>
+            <Link to="/">STORY LAND</Link>
           </h1>
           {user && (
              <Link to={`/settings`}>
@@ -44,10 +44,7 @@ const NavBar = () => {
             <Link to="/">Home</Link>
           </li>
           <li className="list-item">
-            <Link to="/blogpost">Blog Post</Link>
-          </li>
-          <li className="list-item">
-            <Link to="/contact">Contact</Link>
+            <Link to="/blogpost">Stories</Link>
           </li>
           {user && (
             <li className="list-item">
@@ -67,7 +64,7 @@ const NavBar = () => {
             </Link>
           )}
           {!user && (
-            <Link to="/login" className="signIn-btn">
+            <Link to="/login" className="login-btn">
               Login
             </Link>
           )}

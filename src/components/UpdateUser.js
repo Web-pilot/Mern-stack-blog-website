@@ -9,22 +9,22 @@ const UpdateUser = () => {
   const { dispatch, user } = useContext(Context);
   const [username, setUsername] = useState(user.username);
   const [email, setEmail] = useState(user.email);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [file, setFile] = useState(null);
-  const [success, setSuccess] = useState(false)
+  const [success, setSuccess] = useState(false);
 
   const PF = "http://localhost:5000/images/";
 
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    dispatch({type: 'UPDATE_START'})
+    dispatch({ type: "UPDATE_START" });
     const newUpdate = {
-       userId: user._id,
+      userId: user._id,
       username,
       email,
       password,
-      profilePic: file ? file : user.profilePic
+      profilePic: file ? file : user.profilePic,
     };
 
     if (file) {
@@ -42,14 +42,18 @@ const UpdateUser = () => {
 
     try {
       const res = await axios.put(`/users/${user._id}`, newUpdate);
-      dispatch({type: 'UPDATE_SUCCESS', payLoad: res.data})
+      dispatch({ type: "UPDATE_SUCCESS", payLoad: res.data });
       setSuccess(true);
     } catch (error) {
       console.log(error);
-      dispatch({type: 'UPADATE_FAILURE'})
+      dispatch({ type: "UPADATE_FAILURE" });
     }
   };
 
+  const deleteAccount = async () => {
+     await axios.delete(`/users/${user._id}`, {data:{userId: user._id}})
+     dispatch({type: 'LOG_OUT'})
+  }
   return (
     <>
       <NavBar />
@@ -58,7 +62,10 @@ const UpdateUser = () => {
         <div className="user-info">
           <form onSubmit={handleUpdate}>
             <div className="avatar">
-              <img src={file ? URL.createObjectURL(file) : PF + user.profilePic}  alt="" />
+              <img
+                src={file ? URL.createObjectURL(file) : PF + user.profilePic}
+                alt=""
+              />
               <label htmlFor="profPic">
                 <FaUser className="plus-icon" />
               </label>
@@ -77,7 +84,11 @@ const UpdateUser = () => {
               />
             </div>
             <div className="form-control">
-              <input type="email" value={email} onChange={e=> setEmail(e.target.value)} />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
             <div className="form-control">
               <input
@@ -92,14 +103,22 @@ const UpdateUser = () => {
               <input
                 type="button"
                 value="Delete Account"
-                style={{ background: "inherit", border: "none" }}
+                style={{
+                  background: "inherit",
+                  border: "none",
+                  color: "red",
+                  cursor: "pointer",
+                }}
+                onClick={deleteAccount}
               />
             </div>
             <button type="submit" className="update-btn">
               Update
             </button>
           </form>
-          {success && <span style={{color: 'green'}}>user updated successfuly</span>}
+          {success && (
+            <span style={{ color: "green" }}>user updated successfuly</span>
+          )}
         </div>
       </section>
     </>

@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 
 const Register = () => {
-  const usernameRef = useRef('');
-  const passwordRef = useRef('');
-  const emailRef = useRef('');
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const emailRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,8 +14,9 @@ const Register = () => {
       username: usernameRef.current.value.toLowerCase(),
       email: emailRef.current.value.toLowerCase(),
       password: passwordRef.current.value.toLowerCase(),
-    });
+});
     window.location.replace('/login')
+    console.log(res)
   };
   return (
     <>

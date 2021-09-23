@@ -4,6 +4,7 @@ import { FaPlusCircle } from "react-icons/fa";
 import NavBar from "./NavBar";
 import { Context } from "../context/Context";
 import axios from "axios";
+import image from "../images/buy-1.jpg";
 
 const CreatePost = () => {
   //Context
@@ -35,7 +36,7 @@ const CreatePost = () => {
       }
     }
     try {
-     await axios.post("/posts", newStory);
+      await axios.post("/posts", newStory);
       window.location.replace(`/blogpost`);
     } catch (error) {
       console.log(error);
@@ -46,9 +47,14 @@ const CreatePost = () => {
     <>
       <NavBar />
       <article className="create-post">
+        <h5>Tell us a story</h5>
         <form onSubmit={handleSubmit}>
           <div className="create-post-img">
-            {file && <img src={URL.createObjectURL(file)} alt="" />}
+            {file ? (
+              <img src={URL.createObjectURL(file)} alt="" />
+            ) : (
+              <img src={image} alt={file?.name} />
+            )}
             <label htmlFor="photo">
               <FaPlusCircle className="add-foto-icon" />
             </label>
